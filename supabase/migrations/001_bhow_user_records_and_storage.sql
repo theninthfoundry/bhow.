@@ -27,3 +27,8 @@ begin
 end;
 $$;
 
+drop trigger if exists bhow_user_records_updated_at on public.bhow_user_records;
+create trigger bhow_user_records_updated_at
+before update on public.bhow_user_records
+for each row execute function public.bhow_set_updated_at();
+
