@@ -265,3 +265,7 @@ async function init(){
 $("scanFile").addEventListener("change",e=>{
  const file=e.target.files?.[0];if(!file)return;
  if(!file.type.startsWith("image/")){alert("Choose an image file.");e.target.value="";return}
+ if(file.size>10*1024*1024){alert("Image must be 10 MB or smaller.");e.target.value="";return}
+ state.scanFile=file;$("scanPreview").src=URL.createObjectURL(file);$("scanPreview").classList.remove("hidden");$("scanFileName").textContent=file.name+" · "+(file.size/1024/1024).toFixed(2)+" MB";
+});
+document.querySelectorAll("[data-modality]").forEach(b=>b.onclick=()=>{state.modality=b.dataset.modality;document.querySelectorAll("[data-modality]").forEach(x=>x.classList.toggle("active",x===b))});

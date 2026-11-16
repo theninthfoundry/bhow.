@@ -90,3 +90,4 @@ Import the folder/repository into Vercel. The included `vercel.json` maps `/api/
 
 - [ ] Run the SQL migration successfully.
 - [ ] Configure Supabase URL and publishable key.
+- [ ] Create a test account.
