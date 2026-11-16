@@ -32,3 +32,9 @@ create trigger bhow_user_records_updated_at
 before update on public.bhow_user_records
 for each row execute function public.bhow_set_updated_at();
 
+alter table public.bhow_user_records enable row level security;
+
+drop policy if exists "bhow_records_select_own" on public.bhow_user_records;
+create policy "bhow_records_select_own"
+on public.bhow_user_records for select
+to authenticated
