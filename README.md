@@ -4,3 +4,4 @@ A lightweight web application for dog records, basic care tasks and lost-dog rep
 
 ## Important source-provenance note
 
+This is a **clean, reconstructed source package** based on the verified BHOW deployment configuration, API contract, Supabase architecture and feature requirements available during preparation. It is not a byte-for-byte export of the currently deployed frontend: the Vercel file-content endpoint truncated the large deployed HTML file, so the complete original frontend could not be recovered. The frontend in this package is a complete, maintainable implementation of the core workflows, not a claim that every pixel or legacy interaction is identical to the preview.
