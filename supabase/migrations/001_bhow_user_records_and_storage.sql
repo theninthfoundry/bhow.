@@ -79,3 +79,9 @@ drop policy if exists "bhow_storage_read_own" on storage.objects;
 create policy "bhow_storage_read_own"
 on storage.objects for select
 to authenticated
+using (
+    bucket_id = 'bhow-private'
+    and (storage.foldername(name))[1] = auth.uid()::text
+);
+
+drop policy if exists "bhow_storage_insert_own" on storage.objects;
