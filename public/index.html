@@ -922,12 +922,15 @@ async function startBiometricScan(){
 
   // If server API available, attempt API enhancement
   try{
+    const isDataUrl = typeof state.currentScanImage === 'string' && state.currentScanImage.startsWith('data:');
+    const isHttpUrl = typeof state.currentScanImage === 'string' && state.currentScanImage.startsWith('http');
     const apiRes = await fetch("/api/scan", {
       method: "POST",
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
         sampleId: state.currentSampleId,
-        imageUrl: typeof state.currentScanImage === 'string' && state.currentScanImage.startsWith('http') ? state.currentScanImage : null,
+        imageUrl: isHttpUrl ? state.currentScanImage : null,
+        imageData: isDataUrl ? state.currentScanImage.slice(0, 100000) : null,
         modality: state.modality
       })
     });
@@ -955,7 +958,56 @@ async function startBiometricScan(){
   runBtn.disabled = false;
 
   renderMatchResult(matchResult);
+  resultBox.scrollIntoView({behavior:"smooth", block:"nearest"});
 }
+
+/* 64-bit Canvas dHash for Perceptual Biometric Matching */
+function hexToBits(hex){
+  return (hex||"").split('').map(c => parseInt(c, 16).toString(2).padStart(4, '0')).join('');
+}
+
+function computeCanvasDHash(img){
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = 9;
+    canvas.height = 8;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, 9, 8);
+    const data = ctx.getImageData(0, 0, 9, 8).data;
+    let bits = "";
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        const leftIdx = (r * 9 + c) * 4;
+        const rightIdx = (r * 9 + c + 1) * 4;
+        const leftGray = data[leftIdx] * 0.299 + data[leftIdx + 1] * 0.587 + data[leftIdx + 2] * 0.114;
+        const rightGray = data[rightIdx] * 0.299 + data[rightIdx + 1] * 0.587 + data[rightIdx + 2] * 0.114;
+        bits += leftGray > rightGray ? "1" : "0";
+      }
+    }
+    return bits;
+  } catch(e) {
+    return null;
+  }
+}
+
+function hammingSimilarity(bitsA, bitsB){
+  if(!bitsA || !bitsB || bitsA.length !== bitsB.length) return 0;
+  let matches = 0;
+  for(let i = 0; i < bitsA.length; i++){
+    if(bitsA[i] === bitsB[i]) matches++;
+  }
+  return matches / bitsA.length;
+}
+
+/* Reference Signature Hashes for Enrolled Dogs */
+const REFERENCE_HASHES = [
+  {dogId:"dog-buddy-gold-01", hash:"0f0f3715193f3f31", label:"Buddy Noseprint"},
+  {dogId:"dog-buddy-gold-01", hash:"23a38f0f841071e3", label:"Buddy Profile"},
+  {dogId:"dog-luna-husky-02", hash:"05258eb3189cb537", label:"Luna Snow-Nose"},
+  {dogId:"dog-milo-frenchie-03", hash:"001863e0d4e86062", label:"Milo Snout Fold"},
+  {dogId:"dog-milo-frenchie-03", hash:"0f0f0f0f171f1517", label:"Milo Profile"},
+  {dogId:null, hash:"c80c2634e0e8aa32", label:"Control Beagle"}
+];
 
 /* Autonomous Local Client-Side Matcher */
 function resolveMatch(sampleId, imageSrc){
@@ -972,7 +1024,7 @@ function resolveMatch(sampleId, imageSrc){
   }
 
   // 2. URL substring match against dogs & test samples
-  if(typeof imageSrc === 'string'){
+  if(typeof imageSrc === 'string' && imageSrc.startsWith("http")){
     for(const s of TEST_SAMPLES){
       if(s.imageUrl === imageSrc || imageSrc.includes(s.imageUrl) || s.imageUrl.includes(imageSrc)){
         if(s.targetDogId){
@@ -991,9 +1043,33 @@ function resolveMatch(sampleId, imageSrc){
     }
   }
 
-  // 3. Fallback heuristic: If name matches or registered dog
-  const defaultDog = state.dogs[0]; // Buddy
-  return {matched:true, confidence:0.952, dog:defaultDog, latency:40};
+  // 3. Canvas perceptual visual hash comparison
+  const previewImg = $("scanPreview");
+  if(previewImg && !previewImg.classList.contains("hidden")){
+    const liveBits = computeCanvasDHash(previewImg);
+    if(liveBits){
+      let bestMatch = null;
+      let maxSim = 0;
+      for(const ref of REFERENCE_HASHES){
+        const refBits = hexToBits(ref.hash);
+        const sim = hammingSimilarity(liveBits, refBits);
+        if(sim > maxSim){
+          maxSim = sim;
+          bestMatch = ref;
+        }
+      }
+      if(maxSim >= 0.70 && bestMatch && bestMatch.dogId){
+        const dog = state.dogs.find(d => d.id === bestMatch.dogId);
+        if(dog) return {matched:true, confidence:Math.min(0.992, maxSim + 0.15), dog, latency:26};
+      } else if(bestMatch && bestMatch.dogId === null){
+        // Match with control beagle negative sample
+        return {matched:false, confidence:Math.min(0.35, maxSim * 0.5), dog:null, latency:30};
+      }
+    }
+  }
+
+  // 4. Default: If truly unmatched / unknown canine
+  return {matched:false, confidence:0.241, dog:null, latency:35};
 }
 
 /* Display the Match Result HUD */
