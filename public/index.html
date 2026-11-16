@@ -140,3 +140,6 @@ function render(){
 function openModal(title,body){
  $("modalRoot").innerHTML=`<div class="modalback" id="modalBack"><div class="modal"><div class="modalhead"><h2>${title}</h2><button class="btn ghost" id="closeModal">Close</button></div>${body}</div></div>`;
  $("closeModal").onclick=closeModal;$("modalBack").onclick=e=>{if(e.target.id==="modalBack")closeModal()};
+}
+function closeModal(){$("modalRoot").innerHTML=""}
+function openForm(kind){
