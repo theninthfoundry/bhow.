@@ -95,3 +95,4 @@ Import the folder/repository into Vercel. The included `vercel.json` maps `/api/
 - [ ] Upload a profile photo and verify it loads from private Storage.
 - [ ] Add/complete a care task.
 - [ ] Create a lost-dog report.
+- [ ] Sign out and confirm another account cannot see the first account's cloud records.
