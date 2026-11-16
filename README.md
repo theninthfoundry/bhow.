@@ -26,3 +26,4 @@ The verified deployed API was FastAPI `0.6.3` with `/api` and `/api/health`. The
 ```text
 BHOW/
 ├── README.md
+├── .env.example
