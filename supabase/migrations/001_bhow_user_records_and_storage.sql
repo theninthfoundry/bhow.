@@ -44,3 +44,9 @@ drop policy if exists "bhow_records_insert_own" on public.bhow_user_records;
 create policy "bhow_records_insert_own"
 on public.bhow_user_records for insert
 to authenticated
+with check (owner_id = auth.uid());
+
+drop policy if exists "bhow_records_update_own" on public.bhow_user_records;
+create policy "bhow_records_update_own"
+on public.bhow_user_records for update
+to authenticated
