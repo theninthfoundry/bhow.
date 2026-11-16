@@ -252,3 +252,7 @@ $("authBtn").onclick=authFlow;
 async function init(){
  localLoad();render();
  if(configured()&&window.supabase?.createClient){
+  state.client=window.supabase.createClient(SUPABASE_CONFIG.url,SUPABASE_CONFIG.anonKey);
+  const {data}=await state.client.auth.getSession();
+  state.user=data.session?.user||null;
+  if(state.user){$("authBtn").textContent="Sign out";await cloudLoad();}else setStatus("Local mode");

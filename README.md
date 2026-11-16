@@ -86,3 +86,4 @@ Import the folder/repository into Vercel. The included `vercel.json` maps `/api/
 - Do not upload sensitive personal data or images without appropriate consent.
 - A lost-dog report should expose only contact details the reporting user has chosen to share.
 
+## Verification checklist
