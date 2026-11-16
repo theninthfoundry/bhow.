@@ -18,3 +18,4 @@ The verified deployed API was FastAPI `0.6.3` with `/api` and `/api/health`. The
 - User-scoped cloud record sync through `public.bhow_user_records`.
 - Browser-local mode when Supabase is not configured or the user is signed out.
 - API health endpoint.
+- SQL migration with row-level security and private Storage policies.
