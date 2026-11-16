@@ -29,3 +29,4 @@ BHOW/
 ├── .env.example
 ├── .gitignore
 ├── vercel.json
+├── requirements.txt
