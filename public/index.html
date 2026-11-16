@@ -181,3 +181,7 @@ function caseForm(){
  <div class="field"><label>Contact name</label><input name="contactName"></div>
  <div class="field"><label>Contact phone</label><input name="contactPhone" inputmode="tel"></div>
  <div class="field fullfield"><label>Photo (optional)</label><input name="photo" type="file" accept="image/*"><img id="casePhotoPreview" class="preview hidden" alt=""></div>
+ <div class="field fullfield"><button class="btn">Save report</button></div></form>`);
+ const input=document.querySelector('#caseForm [name=photo]');input.onchange=()=>previewFile(input.files[0],$("casePhotoPreview"));
+ $("caseForm").onsubmit=safe(async f=>{const photo=await saveImage(f.get("photo"));state.cases.unshift({id:id(),dogName:f.get("dogName"),status:f.get("status"),location:f.get("location"),date:f.get("date"),description:f.get("description"),contactName:f.get("contactName"),contactPhone:f.get("contactPhone"),photoPath:photo.path,photoUrl:photo.url,createdAt:new Date().toISOString()});await persist("cases");closeModal()});
+}
