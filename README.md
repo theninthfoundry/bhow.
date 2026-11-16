@@ -31,3 +31,4 @@ BHOW/
 ├── vercel.json
 ├── requirements.txt
 ├── requirements-dev.txt
+├── public/
