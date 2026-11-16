@@ -101,3 +101,6 @@ const SUPABASE_CONFIG = {
 const BUCKET = "bhow-private";
 const STORE_KEYS = {dogs:"bhow_dogs_v1",tasks:"bhow_tasks_v1",cases:"bhow_cases_v1"};
 const state = {dogs:[],tasks:[],cases:[],user:null,client:null,modality:"nose",scanFile:null};
+const $ = (id)=>document.getElementById(id);
+const esc = (v)=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const id = ()=>crypto.randomUUID ? crypto.randomUUID() : "id-"+Date.now()+"-"+Math.random().toString(16).slice(2);
