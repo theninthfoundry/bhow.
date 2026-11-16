@@ -162,3 +162,6 @@ function dogForm(){
  input.onchange=()=>previewFile(input.files[0],$("formPhotoPreview"));
  $("dogForm").onsubmit=safe(async f=>{const photo=await saveImage(f.get("photo"));const d={id:id(),name:f.get("name").trim(),breed:f.get("breed"),age:f.get("age"),sex:f.get("sex"),guardian:f.get("guardian"),phone:f.get("phone"),notes:f.get("notes"),photoPath:photo.path,photoUrl:photo.url,createdAt:new Date().toISOString()};state.dogs.unshift(d);await persist("dogs");closeModal()});
 }
+function taskForm(){
+ openModal("Add care task",`<form id="taskForm" class="formgrid">
+ <div class="field fullfield"><label>Task *</label><input name="title" required maxlength="120" placeholder="e.g. Vaccination follow-up"></div>
