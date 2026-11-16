@@ -46,3 +46,5 @@ BHOW/
 
 ### 1. Frontend only
 
+Open `public/index.html` in a browser. Local mode works without Supabase. For Supabase auth/cloud sync, configure the values in the `SUPABASE_CONFIG` object near the top of the JavaScript in `public/index.html`.
+
