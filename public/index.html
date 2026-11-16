@@ -223,3 +223,7 @@ async function cloudSync(store){
    const {error}=await state.client.from("bhow_user_records").upsert(payload,{onConflict:"owner_id,store_name,record_id"});
    if(error)throw error;
   }
+  setStatus("Cloud synced","ok");
+ }catch(err){console.error(err);setStatus("Cloud sync issue — saved locally","err");}
+}
+async function cloudLoad(){
