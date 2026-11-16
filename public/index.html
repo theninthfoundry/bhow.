@@ -663,6 +663,11 @@ function resetToDemo(){
     localLoad();
     render();
     renderSamples();
+    if(state.user){
+      persist("dogs");
+      persist("tasks");
+      persist("cases");
+    }
     alert("Demo dataset restored successfully!");
   }
 }
@@ -704,11 +709,15 @@ document.addEventListener("click",e=>{
   if(a) openForm(a.dataset.action, a.dataset.id);
 });
 
+/* Global Fallback Canine Silhouette */
+const DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23e7e7dd'/><path d='M50 30c-6 0-11 5-11 11 0 4 2 8 6 10-10 3-17 12-17 23h44c0-11-7-20-17-23 4-2 6-6 6-10 0-6-5-11-11-11z' fill='%2374796e'/></svg>";
+
 /* Card Renderers */
 function dogCard(d){
+  const avatarSrc = d.photoUrl || DEFAULT_AVATAR;
   return `
-  <article class="row">
-    <img class="avatar" src="${esc(d.photoUrl||"")}" onerror="this.src='https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=600&q=80'" alt="${esc(d.name)}">
+  <article class="row" data-id="${esc(d.id)}">
+    <img class="avatar" src="${esc(avatarSrc)}" onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'" alt="${esc(d.name)}">
     <div class="rowmain">
       <div style="display:flex;align-items:center;gap:8px">
         <strong>${esc(d.name)}</strong>
@@ -719,8 +728,9 @@ function dogCard(d){
       ${d.notes ? `<small class="muted" style="margin-top:3px">${esc(d.notes)}</small>` : ""}
     </div>
     <div class="actions">
-      <button class="btn ghost small" onclick="testScanDog('${esc(d.id)}')">⌕ Scan This Dog</button>
-      <button class="btn ghost small" data-action="delete-dog" data-id="${esc(d.id)}">Delete</button>
+      <button class="btn ghost small" onclick="openForm('add-task', '${esc(d.id)}')">＋ Task</button>
+      <button class="btn ghost small" onclick="testScanDog('${esc(d.id)}')">⌕ Scan</button>
+      <button class="btn ghost small" data-action="delete-dog" data-id="${esc(d.id)}" title="Delete profile">×</button>
     </div>
   </article>`;
 }
@@ -745,9 +755,10 @@ function taskCard(t){
 }
 
 function caseCard(c){
+  const avatarSrc = c.photoUrl || DEFAULT_AVATAR;
   return `
   <article class="row">
-    ${c.photoUrl ? `<img class="avatar" src="${esc(c.photoUrl)}" alt="">` : ""}
+    <img class="avatar" src="${esc(avatarSrc)}" onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'" alt="${esc(c.dogName)}">
     <div class="rowmain">
       <div style="display:flex;align-items:center;gap:8px">
         <strong>${esc(c.dogName)}</strong>
@@ -1197,7 +1208,7 @@ function closeModal(){ $("modalRoot").innerHTML = ""; }
 
 function openForm(kind, recordId){
   if(kind === "add-dog") return dogForm();
-  if(kind === "add-task") return taskForm();
+  if(kind === "add-task") return taskForm(recordId);
   if(kind === "add-case") return caseForm();
 }
 
@@ -1235,7 +1246,7 @@ function dogForm(){
       phone: f.get("phone"),
       notes: f.get("notes"),
       photoPath: photo.path,
-      photoUrl: photo.url || "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=600&q=80",
+      photoUrl: photo.url || DEFAULT_AVATAR,
       createdAt: new Date().toISOString()
     };
     state.dogs.unshift(d);
@@ -1244,14 +1255,14 @@ function dogForm(){
   });
 }
 
-function taskForm(){
+function taskForm(preselectedDogId){
   openModal("Add care task", `
     <form id="taskForm" class="formgrid">
       <div class="field fullfield"><label>Task *</label><input name="title" required maxlength="120" placeholder="e.g. Heartworm preventative medication"></div>
       <div class="field"><label>For dog</label>
         <select name="dogId">
           <option value="">General care</option>
-          ${state.dogs.map(d=>`<option value="${esc(d.id)}">${esc(d.name)}</option>`).join("")}
+          ${state.dogs.map(d=>`<option value="${esc(d.id)}" ${d.id === preselectedDogId ? 'selected' : ''}>${esc(d.name)}</option>`).join("")}
         </select>
       </div>
       <div class="field"><label>Due date</label><input name="dueAt" type="date"></div>

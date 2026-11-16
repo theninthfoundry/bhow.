@@ -12,7 +12,7 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "/(api.*|docs|openapi.json|redoc)",
       "dest": "api/index.py"
     },
     {
