@@ -87,3 +87,4 @@ Import the folder/repository into Vercel. The included `vercel.json` maps `/api/
 - A lost-dog report should expose only contact details the reporting user has chosen to share.
 
 ## Verification checklist
+

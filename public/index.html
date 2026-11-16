@@ -256,3 +256,6 @@ async function init(){
   const {data}=await state.client.auth.getSession();
   state.user=data.session?.user||null;
   if(state.user){$("authBtn").textContent="Sign out";await cloudLoad();}else setStatus("Local mode");
+  state.client.auth.onAuthStateChange(async(_event,session)=>{
+   state.user=session?.user||null;
+   if(state.user){$("authBtn").textContent="Sign out";await cloudLoad()}else{$("authBtn").textContent="Sign in";localLoad();render();setStatus("Local mode")}
