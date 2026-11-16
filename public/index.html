@@ -233,3 +233,6 @@ async function cloudLoad(){
  if(error){setStatus("Cloud read failed","err");console.error(error);return}
  for(const store of Object.keys(STORE_KEYS)){state[store]=(data||[]).filter(x=>x.store_name===store).map(x=>x.payload)}
  await refreshSignedImages();render();setStatus("Cloud synced","ok");
+}
+async function authFlow(){
+ if(!configured())return alert("Supabase is not configured yet. Add your project URL and publishable key in public/index.html.");
