@@ -38,3 +38,9 @@ drop policy if exists "bhow_records_select_own" on public.bhow_user_records;
 create policy "bhow_records_select_own"
 on public.bhow_user_records for select
 to authenticated
+using (owner_id = auth.uid());
+
+drop policy if exists "bhow_records_insert_own" on public.bhow_user_records;
+create policy "bhow_records_insert_own"
+on public.bhow_user_records for insert
+to authenticated
