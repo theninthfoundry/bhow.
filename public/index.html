@@ -269,3 +269,6 @@ $("scanFile").addEventListener("change",e=>{
  state.scanFile=file;$("scanPreview").src=URL.createObjectURL(file);$("scanPreview").classList.remove("hidden");$("scanFileName").textContent=file.name+" · "+(file.size/1024/1024).toFixed(2)+" MB";
 });
 document.querySelectorAll("[data-modality]").forEach(b=>b.onclick=()=>{state.modality=b.dataset.modality;document.querySelectorAll("[data-modality]").forEach(x=>x.classList.toggle("active",x===b))});
+document.addEventListener("click",e=>{
+ const b=e.target.closest("[data-action]");if(!b)return;
+ const rid=b.dataset.id;
