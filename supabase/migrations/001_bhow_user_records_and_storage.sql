@@ -73,3 +73,9 @@ values (
 on conflict (id) do update set
     public = false,
     file_size_limit = excluded.file_size_limit,
+    allowed_mime_types = excluded.allowed_mime_types;
+
+drop policy if exists "bhow_storage_read_own" on storage.objects;
+create policy "bhow_storage_read_own"
+on storage.objects for select
+to authenticated
