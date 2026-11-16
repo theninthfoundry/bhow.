@@ -52,3 +52,4 @@ Open `public/index.html` in a browser. Local mode works without Supabase. For Su
 
 ```bash
 python -m venv .venv
+# Windows:
