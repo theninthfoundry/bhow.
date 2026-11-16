@@ -207,3 +207,7 @@ async function refreshSignedImages(){
 }
 function dropPhoto(r){if(r?.photoPath&&state.client&&state.user)state.client.storage.from(BUCKET).remove([r.photoPath]).catch(console.error)}
 let syncChain=Promise.resolve();
+function persist(store){localSave();render();syncChain=syncChain.then(()=>cloudSync(store));return syncChain}
+async function cloudSync(store){
+ if(!state.client||!state.user)return;
+ try{
