@@ -194,3 +194,7 @@ async function saveImage(file){
  if(file.size>10*1024*1024)throw new Error("Image must be 10 MB or smaller.");
  if(!state.client||!state.user)return {path:null,url:await toDataUrl(file)};
  const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
+ const path=`${state.user.id}/${id()}.${ext}`;
+ const {error}=await state.client.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});
+ if(error)throw error;
+ const {data,error:signError}=await state.client.storage.from(BUCKET).createSignedUrl(path,3600);
