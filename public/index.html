@@ -133,3 +133,6 @@ function render(){
  $("statDogs").textContent=state.dogs.length;$("statTasks").textContent=state.tasks.filter(x=>!x.done).length;$("statCases").textContent=state.cases.length;
  $("homeDogs").innerHTML=state.dogs.slice(0,4).map(dogCard).join("")||'<div class="empty"><b>No dogs registered yet</b>Add a profile to start your registry.</div>';
  $("dogsList").innerHTML=state.dogs.map(dogCard).join("")||'<div class="card empty"><b>Your registry is empty</b>Register a dog to keep their information together.</div>';
+ $("homeTasks").innerHTML=state.tasks.filter(x=>!x.done).slice(0,4).map(taskCard).join("")||'<div class="empty">No open care tasks.</div>';
+ $("tasksList").innerHTML=state.tasks.map(taskCard).join("")||'<div class="card empty"><b>No care tasks yet</b>Add a reminder for your dog.</div>';
+ $("casesList").innerHTML=state.cases.map(caseCard).join("")||'<div class="card empty"><b>No reports created</b>Create a lost-dog report to organise the details.</div>';
