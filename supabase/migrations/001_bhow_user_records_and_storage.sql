@@ -56,3 +56,8 @@ with check (owner_id = auth.uid());
 drop policy if exists "bhow_records_delete_own" on public.bhow_user_records;
 create policy "bhow_records_delete_own"
 on public.bhow_user_records for delete
+to authenticated
+using (owner_id = auth.uid());
+
+grant select, insert, update, delete on public.bhow_user_records to authenticated;
+
