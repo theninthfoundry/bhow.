@@ -12,3 +12,4 @@ The verified deployed API was FastAPI `0.6.3` with `/api` and `/api/health`. The
 
 - Dog registry: create, view and delete dog records.
 - Care tasks: add, complete and delete tasks.
+- Lost & Found: create and remove lost-dog reports.
