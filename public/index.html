@@ -117,3 +117,6 @@ function page(name){
 }
 document.addEventListener("click",e=>{
  const p=e.target.closest("[data-page]");if(p){page(p.dataset.page);return}
+ const a=e.target.closest("[data-action]");if(a)openForm(a.dataset.action);
+});
+function dogCard(d){
