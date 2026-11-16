@@ -220,3 +220,6 @@ async function cloudSync(store){
   if(removed.length){const {error}=await state.client.from("bhow_user_records").delete().eq("store_name",store).in("record_id",removed);if(error)throw error}
   if(records.length){
    const payload=records.map(x=>({owner_id:state.user.id,store_name:store,record_id:x.id,payload:(({photoUrl,...rest})=>rest)(x)}));
+   const {error}=await state.client.from("bhow_user_records").upsert(payload,{onConflict:"owner_id,store_name,record_id"});
+   if(error)throw error;
+  }
