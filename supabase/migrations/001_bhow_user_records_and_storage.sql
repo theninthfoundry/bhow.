@@ -3,3 +3,9 @@
 
 create extension if not exists pgcrypto;
 
+create table if not exists public.bhow_user_records (
+    id uuid primary key default gen_random_uuid(),
+    owner_id uuid not null references auth.users(id) on delete cascade,
+    store_name text not null check (store_name in ('dogs', 'tasks', 'cases')),
+    record_id text not null,
+    payload jsonb not null default '{}'::jsonb,
