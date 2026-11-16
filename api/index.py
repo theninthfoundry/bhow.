@@ -6,3 +6,7 @@ app = FastAPI(
     version="0.6.3",
     description="BHOW dog wellbeing and lost-dog reunification prototype API."
 )
+
+@app.get("/api/health")
+def health():
+    return {
