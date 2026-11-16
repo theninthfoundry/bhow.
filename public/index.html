@@ -272,3 +272,6 @@ document.querySelectorAll("[data-modality]").forEach(b=>b.onclick=()=>{state.mod
 document.addEventListener("click",e=>{
  const b=e.target.closest("[data-action]");if(!b)return;
  const rid=b.dataset.id;
+ if(b.dataset.action==="toggle-task"){const t=state.tasks.find(x=>x.id===rid);if(t){t.done=!t.done;persist("tasks")}}
+ if(b.dataset.action==="delete-dog"){if(confirm("Delete this dog profile?")){dropPhoto(state.dogs.find(x=>x.id===rid));state.dogs=state.dogs.filter(x=>x.id!==rid);persist("dogs")}}
+ if(b.dataset.action==="delete-task"){state.tasks=state.tasks.filter(x=>x.id!==rid);persist("tasks")}

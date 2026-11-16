@@ -92,3 +92,4 @@ Import the folder/repository into Vercel. The included `vercel.json` maps `/api/
 - [ ] Configure Supabase URL and publishable key.
 - [ ] Create a test account.
 - [ ] Add a dog and verify it appears after refresh.
+- [ ] Upload a profile photo and verify it loads from private Storage.
