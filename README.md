@@ -69,3 +69,4 @@ Health endpoint: `http://127.0.0.1:8000/api/health`
 2. Open SQL Editor and run `supabase/migrations/001_bhow_user_records_and_storage.sql`.
 3. In `public/index.html`, set:
    - `SUPABASE_CONFIG.url` to your project URL.
+   - `SUPABASE_CONFIG.anonKey` to your **publishable/anon key**.

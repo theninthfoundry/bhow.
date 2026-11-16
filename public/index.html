@@ -204,3 +204,6 @@ async function saveImage(file){
 async function refreshSignedImages(){
  if(!state.client||!state.user)return;
  const recs=[...state.dogs,...state.cases].filter(r=>r.photoPath);await Promise.all(recs.map(async r=>{const {data}=await state.client.storage.from(BUCKET).createSignedUrl(r.photoPath,3600);if(data?.signedUrl)r.photoUrl=data.signedUrl}));
+}
+function dropPhoto(r){if(r?.photoPath&&state.client&&state.user)state.client.storage.from(BUCKET).remove([r.photoPath]).catch(console.error)}
+let syncChain=Promise.resolve();
