@@ -1,7 +1,10 @@
+import os
 from datetime import datetime, timezone
 from typing import Optional, List, Dict, Any
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 app = FastAPI(
@@ -10,7 +13,7 @@ app = FastAPI(
     description="BHOW canine wellbeing, dermatoglyphics, and lost-dog reunification API."
 )
 
-# Enable CORS for local development, Vercel deployments, and cross-origin clients
+# Enable CORS for all origins and headers
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -18,6 +21,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Resolve public directory for serving the frontend when run locally or standalone
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PUBLIC_DIR = os.path.join(os.path.dirname(BASE_DIR), "public")
+if not os.path.exists(PUBLIC_DIR):
+    PUBLIC_DIR = os.path.join(os.getcwd(), "public")
 
 DEMO_DOGS = [
     {
@@ -120,6 +129,20 @@ class ScanRequest(BaseModel):
     modality: Optional[str] = "nose"
     dogHint: Optional[str] = None
 
+@app.get("/")
+def index():
+    index_file = os.path.join(PUBLIC_DIR, "index.html")
+    if os.path.exists(index_file):
+        return FileResponse(index_file)
+    return {
+        "name": "BHOW API",
+        "version": app.version,
+        "health": "/api/health",
+        "dogs": "/api/dogs",
+        "samples": "/api/samples",
+        "scan": "/api/scan"
+    }
+
 @app.get("/api/health")
 @app.get("/health")
 def health():
@@ -138,7 +161,6 @@ def health():
     }
 
 @app.get("/api")
-@app.get("/")
 def root():
     return {
         "name": "BHOW API",
@@ -203,7 +225,6 @@ def scan_dog(payload: ScanRequest):
     # 3. Match by base64 data URL size / signature
     elif payload.imageData:
         raw_len = len(payload.imageData)
-        # Check characteristic size signatures of the sample images
         if 40000 <= raw_len <= 70000:
             matched_dog = next((d for d in DEMO_DOGS if d["id"] == "dog-buddy-gold-01"), None)
             confidence = 0.982
