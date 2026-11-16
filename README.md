@@ -54,3 +54,4 @@ Open `public/index.html` in a browser. Local mode works without Supabase. For Su
 python -m venv .venv
 # Windows:
 .venv\Scripts\activate
+# macOS/Linux:
