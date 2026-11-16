@@ -9,3 +9,9 @@ create table if not exists public.bhow_user_records (
     store_name text not null check (store_name in ('dogs', 'tasks', 'cases')),
     record_id text not null,
     payload jsonb not null default '{}'::jsonb,
+    created_at timestamptz not null default now(),
+    updated_at timestamptz not null default now(),
+    unique (owner_id, store_name, record_id)
+);
+
+create index if not exists bhow_user_records_owner_store_idx
