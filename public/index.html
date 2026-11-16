@@ -275,3 +275,6 @@ document.addEventListener("click",e=>{
  if(b.dataset.action==="toggle-task"){const t=state.tasks.find(x=>x.id===rid);if(t){t.done=!t.done;persist("tasks")}}
  if(b.dataset.action==="delete-dog"){if(confirm("Delete this dog profile?")){dropPhoto(state.dogs.find(x=>x.id===rid));state.dogs=state.dogs.filter(x=>x.id!==rid);persist("dogs")}}
  if(b.dataset.action==="delete-task"){state.tasks=state.tasks.filter(x=>x.id!==rid);persist("tasks")}
+ if(b.dataset.action==="delete-case"){if(confirm("Delete this report?")){dropPhoto(state.cases.find(x=>x.id===rid));state.cases=state.cases.filter(x=>x.id!==rid);persist("cases")}}
+});
+setInterval(async()=>{if(state.user){await refreshSignedImages();render()}},50*60*1000);
