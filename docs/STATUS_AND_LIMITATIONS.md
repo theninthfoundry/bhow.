@@ -15,3 +15,8 @@
 ## Not implemented / not validated
 
 - No trained noseprint or pawprint recognition model is included.
+- No identity-confirmation claim is made.
+- The scanner view is an image intake and workflow placeholder; it does not return scientifically meaningful biometric matches.
+- No independent biometric dataset, training pipeline, benchmark or evaluation report is included.
+- No public lost-dog discovery feed or moderation service is included in this reconstructed minimal source package.
+- No production security audit has been performed.
