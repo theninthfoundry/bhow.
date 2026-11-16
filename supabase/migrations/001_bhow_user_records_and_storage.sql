@@ -96,3 +96,9 @@ with check (
 drop policy if exists "bhow_storage_update_own" on storage.objects;
 create policy "bhow_storage_update_own"
 on storage.objects for update
+to authenticated
+using (
+    bucket_id = 'bhow-private'
+    and (storage.foldername(name))[1] = auth.uid()::text
+)
+with check (
