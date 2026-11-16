@@ -20,3 +20,9 @@
 - No independent biometric dataset, training pipeline, benchmark or evaluation report is included.
 - No public lost-dog discovery feed or moderation service is included in this reconstructed minimal source package.
 - No production security audit has been performed.
+
+## Deployment provenance
+
+The deployed BHOW preview was verified to have:
+- FastAPI API version 0.6.3.
+- `/api` and `/api/health` routes.
