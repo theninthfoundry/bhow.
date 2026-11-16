@@ -156,3 +156,6 @@ function dogForm(){
  <div class="field"><label>Guardian name</label><input name="guardian"></div>
  <div class="field"><label>Guardian phone</label><input name="phone" inputmode="tel"></div>
  <div class="field fullfield"><label>Notes / identifying details</label><textarea name="notes"></textarea></div>
+ <div class="field fullfield"><label>Profile photo (optional)</label><input name="photo" type="file" accept="image/*"><img id="formPhotoPreview" class="preview hidden" alt=""></div>
+ <div class="field fullfield"><button class="btn">Save dog profile</button></div></form>`);
+ const input=document.querySelector('#dogForm [name=photo]');
