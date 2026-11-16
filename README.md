@@ -28,3 +28,4 @@ BHOW/
 ├── README.md
 ├── .env.example
 ├── .gitignore
+├── vercel.json
