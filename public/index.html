@@ -191,3 +191,6 @@ function toDataUrl(file){return new Promise((res,rej)=>{const u=URL.createObject
 async function saveImage(file){
  if(!file||!file.size)return {path:null,url:null};
  if(!file.type.startsWith("image/"))throw new Error("Please choose an image file.");
+ if(file.size>10*1024*1024)throw new Error("Image must be 10 MB or smaller.");
+ if(!state.client||!state.user)return {path:null,url:await toDataUrl(file)};
+ const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
