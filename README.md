@@ -82,3 +82,4 @@ Import the folder/repository into Vercel. The included `vercel.json` maps `/api/
 
 - The `bhow_user_records` table is protected by RLS. A user can read and modify only their own records.
 - Storage is private. The frontend uses authenticated uploads and short-lived signed URLs for image display.
+- Local mode stores records in the browser's localStorage. Clearing browser data can remove local-only records.
