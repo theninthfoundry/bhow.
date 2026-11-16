@@ -9,3 +9,5 @@ This is a **clean, reconstructed source package** based on the verified BHOW dep
 The verified deployed API was FastAPI `0.6.3` with `/api` and `/api/health`. The verified deployment used `requirements.txt` containing `fastapi` and `pydantic`, and a Vercel static + Python function configuration. The deployed app also used Supabase Auth, a private `bhow-private` Storage bucket, and a user-scoped `bhow_user_records` table.
 
 ## Features in this package
+
+- Dog registry: create, view and delete dog records.

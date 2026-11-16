@@ -27,3 +27,6 @@ button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
 .status{font-size:12px;color:var(--muted)}.status.ok{color:var(--green)}.status.err{color:var(--red)}
 .modalback{position:fixed;inset:0;background:#1119;display:grid;place-items:center;padding:18px;z-index:10}.modal{width:min(560px,100%);background:var(--paper);border-radius:20px;padding:22px;max-height:90vh;overflow:auto}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.modalhead h2{margin:0}
 .mobilebar{display:none}
+@media(max-width:800px){.shell{display:block}.side{display:none}.main{padding:20px 14px 90px}.stat{grid-column:span 4}.wide,.narrow{grid-column:span 12}.mobilebar{display:flex;position:fixed;bottom:0;left:0;right:0;background:#faf9f4;border-top:1px solid var(--line);justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:5}.mobilebar button{background:none;color:var(--muted);padding:7px;font-size:12px}.mobilebar button.active{color:var(--green);font-weight:800}}
+@media(max-width:460px){.stat{grid-column:span 12}.formgrid{grid-template-columns:1fr}.field.fullfield{grid-column:auto}.top{align-items:flex-start;flex-direction:column}}
+</style>
