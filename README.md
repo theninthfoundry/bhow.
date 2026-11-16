@@ -96,3 +96,5 @@ Import the folder/repository into Vercel. The included `vercel.json` maps `/api/
 - [ ] Add/complete a care task.
 - [ ] Create a lost-dog report.
 - [ ] Sign out and confirm another account cannot see the first account's cloud records.
+- [ ] Test gallery selection in Chrome on Android and desktop browsers.
+- [ ] Configure and test production domain, auth redirect URLs and email templates.
