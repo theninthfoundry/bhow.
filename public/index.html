@@ -169,3 +169,6 @@ function taskForm(){
  <div class="field"><label>Due date</label><input name="dueAt" type="date"></div>
  <div class="field fullfield"><label>Details</label><textarea name="detail"></textarea></div>
  <div class="field fullfield"><button class="btn">Save task</button></div></form>`);
+ $("taskForm").onsubmit=safe(async f=>{state.tasks.unshift({id:id(),title:f.get("title").trim(),dogId:f.get("dogId"),dueAt:f.get("dueAt"),detail:f.get("detail"),done:false});await persist("tasks");closeModal()});
+}
+function caseForm(){
