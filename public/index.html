@@ -278,3 +278,7 @@ document.addEventListener("click",e=>{
  if(b.dataset.action==="delete-case"){if(confirm("Delete this report?")){dropPhoto(state.cases.find(x=>x.id===rid));state.cases=state.cases.filter(x=>x.id!==rid);persist("cases")}}
 });
 setInterval(async()=>{if(state.user){await refreshSignedImages();render()}},50*60*1000);
+init();
+</script>
+</body>
+</html>

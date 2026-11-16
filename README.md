@@ -94,3 +94,4 @@ Import the folder/repository into Vercel. The included `vercel.json` maps `/api/
 - [ ] Add a dog and verify it appears after refresh.
 - [ ] Upload a profile photo and verify it loads from private Storage.
 - [ ] Add/complete a care task.
+- [ ] Create a lost-dog report.
