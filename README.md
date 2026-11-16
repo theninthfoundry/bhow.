@@ -39,3 +39,4 @@ BHOW/
 │   └── migrations/
 │       └── 001_bhow_user_records_and_storage.sql
 └── docs/
+    └── STATUS_AND_LIMITATIONS.md

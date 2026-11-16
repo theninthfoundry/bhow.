@@ -114,3 +114,6 @@ function page(name){
  document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===name));
  const meta={home:["DOG WELLBEING / OVERVIEW","A better way to care.","Your dogs, their records, all in one place."],dogs:["YOUR REGISTRY / DOGS","Every dog, known.","Profiles and guardian details."],care:["WELLBEING / CARE JOURNAL","Small things matter.","Keep track of everyday care."],lost:["REUNIFICATION / LOST & FOUND","Help bring them home.","Keep lost-dog information organised."],scan:["IMAGE REFERENCE / EXPERIMENTAL","A closer look.","Image intake for future identification research."]}[name];
  $("pageKicker").textContent=meta[0];$("pageTitle").textContent=meta[1];$("pageSub").textContent=meta[2];
+}
+document.addEventListener("click",e=>{
+ const p=e.target.closest("[data-page]");if(p){page(p.dataset.page);return}
