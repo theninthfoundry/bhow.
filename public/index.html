@@ -107,3 +107,6 @@ const id = ()=>crypto.randomUUID ? crypto.randomUUID() : "id-"+Date.now()+"-"+Ma
 const configured = ()=>!SUPABASE_CONFIG.url.includes("YOUR_PROJECT_REF") && !SUPABASE_CONFIG.anonKey.includes("YOUR_SUPABASE");
 function localLoad(){for(const k of Object.keys(STORE_KEYS)){try{state[k]=JSON.parse(localStorage.getItem(STORE_KEYS[k])||"[]")}catch{state[k]=[]}}}
 function localSave(){if(state.user)return;for(const k of Object.keys(STORE_KEYS)){try{localStorage.setItem(STORE_KEYS[k],JSON.stringify(state[k]))}catch{alert("Browser storage is full. Sign in to use cloud storage, or delete some photos.")}}}
+function setStatus(text,kind=""){ $("cloudStatus").textContent=text;$("cloudStatus").className="status "+kind; }
+function page(name){
+ document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));

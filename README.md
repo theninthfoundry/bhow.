@@ -37,3 +37,4 @@ BHOW/
 │   └── index.py
 ├── supabase/
 │   └── migrations/
+│       └── 001_bhow_user_records_and_storage.sql
