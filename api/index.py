@@ -10,3 +10,7 @@ app = FastAPI(
 @app.get("/api/health")
 def health():
     return {
+        "status": "ok",
+        "service": "bhow-api",
+        "version": app.version,
+        "time": datetime.now(timezone.utc).isoformat(),
