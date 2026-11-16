@@ -15,3 +15,4 @@ The verified deployed API was FastAPI `0.6.3` with `/api` and `/api/health`. The
 - Lost & Found: create and remove lost-dog reports.
 - Image selection: choose images from gallery/files, preview them and upload private media when signed in.
 - Supabase email/password authentication.
+- User-scoped cloud record sync through `public.bhow_user_records`.
