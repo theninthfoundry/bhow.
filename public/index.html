@@ -201,3 +201,6 @@ async function saveImage(file){
  if(signError)throw signError;
  return {path,url:data.signedUrl};
 }
+async function refreshSignedImages(){
+ if(!state.client||!state.user)return;
+ const recs=[...state.dogs,...state.cases].filter(r=>r.photoPath);await Promise.all(recs.map(async r=>{const {data}=await state.client.storage.from(BUCKET).createSignedUrl(r.photoPath,3600);if(data?.signedUrl)r.photoUrl=data.signedUrl}));
