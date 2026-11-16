@@ -214,3 +214,6 @@ async function cloudSync(store){
   const records=state[store];
   const {data:existing,error:readErr}=await state.client.from("bhow_user_records").select("record_id").eq("store_name",store);
   if(readErr)throw readErr;
+  const existingIds=(existing||[]).map(x=>x.record_id);
+  const currentIds=records.map(x=>x.id);
+  const removed=existingIds.filter(x=>!currentIds.includes(x));

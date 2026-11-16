@@ -73,3 +73,4 @@ Health endpoint: `http://127.0.0.1:8000/api/health`
 4. Never put a `service_role` key in browser code.
 5. Enable Email auth in Supabase Authentication settings.
 6. Confirm the private Storage bucket `bhow-private` exists after running the migration.
+
