@@ -14,3 +14,7 @@ def health():
         "service": "bhow-api",
         "version": app.version,
         "time": datetime.now(timezone.utc).isoformat(),
+        "note": (
+            "Registry records and private media sync are handled through Supabase. "
+            "Nose/paw biometric identification is experimental and not validated."
+        )
