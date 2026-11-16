@@ -63,3 +63,4 @@ uvicorn api.index:app --reload
 
 Health endpoint: `http://127.0.0.1:8000/api/health`
 
+### 3. Supabase setup
