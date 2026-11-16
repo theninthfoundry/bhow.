@@ -172,3 +172,6 @@ function taskForm(){
  $("taskForm").onsubmit=safe(async f=>{state.tasks.unshift({id:id(),title:f.get("title").trim(),dogId:f.get("dogId"),dueAt:f.get("dueAt"),detail:f.get("detail"),done:false});await persist("tasks");closeModal()});
 }
 function caseForm(){
+ openModal("Create lost-dog report",`<form id="caseForm" class="formgrid">
+ <div class="field"><label>Dog's name *</label><input name="dogName" required></div>
+ <div class="field"><label>Status</label><select name="status"><option>Missing</option><option>Found</option><option>Reunited</option></select></div>
