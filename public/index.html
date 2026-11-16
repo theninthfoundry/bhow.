@@ -120,3 +120,6 @@ document.addEventListener("click",e=>{
  const a=e.target.closest("[data-action]");if(a)openForm(a.dataset.action);
 });
 function dogCard(d){
+ return `<article class="row"><img class="avatar" src="${esc(d.photoUrl||"")}" onerror="this.style.visibility='hidden'" alt=""><div class="rowmain"><strong>${esc(d.name)}</strong><small>${esc([d.breed,d.age,d.sex].filter(Boolean).join(" · ")||"Dog profile")}</small><small>${esc(d.guardian||"Guardian not added")} ${d.phone?"· "+esc(d.phone):""}</small></div><button class="btn ghost" data-action="delete-dog" data-id="${esc(d.id)}">Delete</button></article>`;
+}
+function taskCard(t){
