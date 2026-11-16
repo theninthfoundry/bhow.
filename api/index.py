@@ -18,3 +18,7 @@ def health():
             "Registry records and private media sync are handled through Supabase. "
             "Nose/paw biometric identification is experimental and not validated."
         )
+    }
+
+@app.get("/api")
+def root():
