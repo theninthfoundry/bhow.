@@ -143,3 +143,6 @@ function openModal(title,body){
 }
 function closeModal(){$("modalRoot").innerHTML=""}
 function openForm(kind){
+ if(kind==="add-dog")return dogForm();
+ if(kind==="add-task")return taskForm();
+ if(kind==="add-case")return caseForm();
