@@ -130,3 +130,6 @@ function caseCard(c){
  return `<article class="row">${c.photoUrl?`<img class="avatar" src="${esc(c.photoUrl)}" alt="">`:""}<div class="rowmain"><strong>${esc(c.dogName)} — ${esc(c.status||"Missing")}</strong><small>${esc(c.location||"Location not added")} · ${esc(c.date||"Date not added")}</small><small>${esc(c.description||"No additional details")}</small>${c.contactName||c.contactPhone?`<small>Contact: ${esc([c.contactName,c.contactPhone].filter(Boolean).join(" · "))}</small>`:""}</div><button class="btn ghost" data-action="delete-case" data-id="${esc(c.id)}">Delete</button></article>`;
 }
 function render(){
+ $("statDogs").textContent=state.dogs.length;$("statTasks").textContent=state.tasks.filter(x=>!x.done).length;$("statCases").textContent=state.cases.length;
+ $("homeDogs").innerHTML=state.dogs.slice(0,4).map(dogCard).join("")||'<div class="empty"><b>No dogs registered yet</b>Add a profile to start your registry.</div>';
+ $("dogsList").innerHTML=state.dogs.map(dogCard).join("")||'<div class="card empty"><b>Your registry is empty</b>Register a dog to keep their information together.</div>';

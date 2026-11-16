@@ -44,3 +44,4 @@ BHOW/
 
 ## Run locally
 
+### 1. Frontend only
