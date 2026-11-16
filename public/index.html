@@ -188,3 +188,6 @@ function caseForm(){
 function safe(fn){return async e=>{e.preventDefault();const b=e.target.querySelector("button:not([type=button])");if(b)b.disabled=true;try{await fn(new FormData(e.target))}catch(err){alert(err.message||"Something went wrong.");if(b)b.disabled=false}}}
 function previewFile(file,img){if(!file)return;img.src=URL.createObjectURL(file);img.classList.remove("hidden")}
 function toDataUrl(file){return new Promise((res,rej)=>{const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{const k=Math.min(1,640/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL("image/jpeg",0.8))};im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error("Could not read this image."))};im.src=u})}
+async function saveImage(file){
+ if(!file||!file.size)return {path:null,url:null};
+ if(!file.type.startsWith("image/"))throw new Error("Please choose an image file.");
