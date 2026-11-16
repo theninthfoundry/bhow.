@@ -22,3 +22,8 @@ def health():
 
 @app.get("/api")
 def root():
+    return {
+        "name": "BHOW API",
+        "health": "/api/health",
+        "note": "BHOW prototype API"
+    }
