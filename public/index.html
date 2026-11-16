@@ -127,3 +127,6 @@ function taskCard(t){
  return `<article class="row"><div class="rowmain"><strong>${esc(t.title)}</strong><small>${esc(dog?.name||"General care")} ${t.dueAt?"· "+esc(t.dueAt):""}</small></div><button class="btn ${t.done?"secondary":""}" data-action="toggle-task" data-id="${esc(t.id)}">${t.done?"Done ✓":"Complete"}</button><button class="btn ghost" data-action="delete-task" data-id="${esc(t.id)}">×</button></article>`;
 }
 function caseCard(c){
+ return `<article class="row">${c.photoUrl?`<img class="avatar" src="${esc(c.photoUrl)}" alt="">`:""}<div class="rowmain"><strong>${esc(c.dogName)} — ${esc(c.status||"Missing")}</strong><small>${esc(c.location||"Location not added")} · ${esc(c.date||"Date not added")}</small><small>${esc(c.description||"No additional details")}</small>${c.contactName||c.contactPhone?`<small>Contact: ${esc([c.contactName,c.contactPhone].filter(Boolean).join(" · "))}</small>`:""}</div><button class="btn ghost" data-action="delete-case" data-id="${esc(c.id)}">Delete</button></article>`;
+}
+function render(){
