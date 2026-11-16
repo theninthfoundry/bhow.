@@ -102,3 +102,9 @@ using (
     and (storage.foldername(name))[1] = auth.uid()::text
 )
 with check (
+    bucket_id = 'bhow-private'
+    and (storage.foldername(name))[1] = auth.uid()::text
+);
+
+drop policy if exists "bhow_storage_delete_own" on storage.objects;
+create policy "bhow_storage_delete_own"
