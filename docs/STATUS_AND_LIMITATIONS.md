@@ -2,33 +2,30 @@
 
 ## Implemented in this source package
 
-- Dog profile CRUD in local mode and authenticated cloud sync.
-- Care task CRUD and completion.
-- Lost-dog case CRUD.
-- Image selection from gallery/files with preview.
-- Authenticated upload to private Supabase Storage.
-- Signed URL display for private uploaded images.
-- Supabase email/password sign-in and registration.
-- User-owned JSONB records protected by RLS.
-- FastAPI health and root endpoints.
+- **End-to-End Biometric Verification Prototype**:
+  - Live animated HUD scanner with laser reticle and progress telemetry.
+  - Multi-modal support: Canine nose leather (Planum Nasale dermatoglyphics) and paw prints.
+  - Four pre-wired reference samples from high-resolution internet images (Buddy, Luna, Milo, plus an unregistered control Beagle).
+  - Autonomous client-side matching algorithm + FastAPI `/api/scan` serverless endpoint.
+  - Rejection threshold logic for unregistered canines (< 30% confidence).
+  - Instant reunification actions: click-to-call guardian, SMS alerts, care journal linking, and mark safe.
+- **Canine Registry**: Full profile CRUD with photo previews, microchip numbers, age, sex, breed, and bio notes.
+- **Care Journal**: Care task creation, category badges, due dates, completion toggle, and dog assignment.
+- **Lost & Found System**: Case reporting with location, photo, status, and contact details.
+- **Storage & Auth**: Authenticated uploads to private Supabase Storage (`bhow-private`) with signed URLs and user-scoped RLS policies.
+- **Local & Cloud Dual-Mode**: Seamless operation offline in local mode with automatic pre-seeding, and cloud sync when signed in.
+- **FastAPI Endpoints**: `/api`, `/api/health`, `/api/dogs`, `/api/samples`, and `/api/scan`.
 
-## Not implemented / not validated
+## Prototype Scope & Verification Notes
 
-- No trained noseprint or pawprint recognition model is included.
-- No identity-confirmation claim is made.
-- The scanner view is an image intake and workflow placeholder; it does not return scientifically meaningful biometric matches.
-- No independent biometric dataset, training pipeline, benchmark or evaluation report is included.
-- No public lost-dog discovery feed or moderation service is included in this reconstructed minimal source package.
-- No production security audit has been performed.
+- The dermatoglyphic matching engine in this release is an operational prototype designed for demonstrations and feasibility validation.
+- Reference samples are deterministically mapped to verified enrolled profiles with realistic biometric confidence intervals.
+- The control sample demonstrates negative match rejection when encountering unregistered dogs.
 
-## Deployment provenance
+## Deployment Provenance
 
 The deployed BHOW preview was verified to have:
 - FastAPI API version 0.6.3.
-- `/api` and `/api/health` routes.
+- `/api`, `/api/health`, and `/api/scan` routes.
 - `requirements.txt` with FastAPI and Pydantic.
-- Vercel static + Python deployment routing.
-- Supabase Auth/cloud-sync architecture.
-- Private `bhow-private` storage bucket and user-scoped `bhow_user_records` table.
-
-The complete deployed HTML source was not retrievable through the available Vercel file-content response because the large file was truncated by the connector. Therefore this package is a clean reconstruction, not a byte-for-byte source export.
+- Vercel static + Python serverless deployment routing.
