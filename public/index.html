@@ -230,3 +230,6 @@ async function cloudLoad(){
  if(!state.client||!state.user)return;
  setStatus("Syncing…");
  const {data,error}=await state.client.from("bhow_user_records").select("store_name,record_id,payload");
+ if(error){setStatus("Cloud read failed","err");console.error(error);return}
+ for(const store of Object.keys(STORE_KEYS)){state[store]=(data||[]).filter(x=>x.store_name===store).map(x=>x.payload)}
+ await refreshSignedImages();render();setStatus("Cloud synced","ok");

@@ -78,3 +78,4 @@ Health endpoint: `http://127.0.0.1:8000/api/health`
 
 Import the folder/repository into Vercel. The included `vercel.json` maps `/api/*` to the Python API and serves the static frontend. If your Vercel project expects a different root directory, set the project root to this repository root.
 
+## Data and privacy notes
