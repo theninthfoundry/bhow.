@@ -198,3 +198,6 @@ async function saveImage(file){
  const {error}=await state.client.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});
  if(error)throw error;
  const {data,error:signError}=await state.client.storage.from(BUCKET).createSignedUrl(path,3600);
+ if(signError)throw signError;
+ return {path,url:data.signedUrl};
+}
