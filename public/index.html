@@ -110,3 +110,7 @@ function localSave(){if(state.user)return;for(const k of Object.keys(STORE_KEYS)
 function setStatus(text,kind=""){ $("cloudStatus").textContent=text;$("cloudStatus").className="status "+kind; }
 function page(name){
  document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));
+ $("page-"+name).classList.remove("hidden");
+ document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===name));
+ const meta={home:["DOG WELLBEING / OVERVIEW","A better way to care.","Your dogs, their records, all in one place."],dogs:["YOUR REGISTRY / DOGS","Every dog, known.","Profiles and guardian details."],care:["WELLBEING / CARE JOURNAL","Small things matter.","Keep track of everyday care."],lost:["REUNIFICATION / LOST & FOUND","Help bring them home.","Keep lost-dog information organised."],scan:["IMAGE REFERENCE / EXPERIMENTAL","A closer look.","Image intake for future identification research."]}[name];
+ $("pageKicker").textContent=meta[0];$("pageTitle").textContent=meta[1];$("pageSub").textContent=meta[2];
