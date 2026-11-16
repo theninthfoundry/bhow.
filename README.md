@@ -20,3 +20,4 @@ The verified deployed API was FastAPI `0.6.3` with `/api` and `/api/health`. The
 - API health endpoint.
 - SQL migration with row-level security and private Storage policies.
 - Scanner UI clearly marked as experimental. This package does **not** implement validated noseprint/pawprint identification or claim identity matches.
+
