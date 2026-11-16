@@ -15,3 +15,9 @@ create table if not exists public.bhow_user_records (
 );
 
 create index if not exists bhow_user_records_owner_store_idx
+    on public.bhow_user_records(owner_id, store_name);
+
+create or replace function public.bhow_set_updated_at()
+returns trigger
+language plpgsql
+as $$
