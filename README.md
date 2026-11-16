@@ -23,3 +23,4 @@ The verified deployed API was FastAPI `0.6.3` with `/api` and `/api/health`. The
 
 ## Project structure
 
+```text
