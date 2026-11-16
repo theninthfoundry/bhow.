@@ -51,3 +51,4 @@ Open `public/index.html` in a browser. Local mode works without Supabase. For Su
 ### 2. Backend
 
 ```bash
+python -m venv .venv
