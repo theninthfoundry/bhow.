@@ -236,3 +236,7 @@ async function cloudLoad(){
 }
 async function authFlow(){
  if(!configured())return alert("Supabase is not configured yet. Add your project URL and publishable key in public/index.html.");
+ if(state.user){
+  const {error}=await state.client.auth.signOut();if(error)alert(error.message);
+  state.user=null;localLoad();render();$("authBtn").textContent="Sign in";setStatus("Local mode");return;
+ }
