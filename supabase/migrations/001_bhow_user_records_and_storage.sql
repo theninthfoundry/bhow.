@@ -61,3 +61,9 @@ using (owner_id = auth.uid());
 
 grant select, insert, update, delete on public.bhow_user_records to authenticated;
 
+-- Private media bucket. Files are stored under <auth.uid()>/<random-name>.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+    'bhow-private',
+    'bhow-private',
+    false,
