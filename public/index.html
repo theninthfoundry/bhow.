@@ -240,3 +240,6 @@ async function authFlow(){
   const {error}=await state.client.auth.signOut();if(error)alert(error.message);
   state.user=null;localLoad();render();$("authBtn").textContent="Sign in";setStatus("Local mode");return;
  }
+ openModal("Sign in / Create account",`<form id="authForm" class="formgrid">
+ <div class="field fullfield"><label>Email</label><input name="email" type="email" required autocomplete="email"></div>
+ <div class="field fullfield"><label>Password</label><input name="password" type="password" required minlength="6" autocomplete="current-password"></div>
