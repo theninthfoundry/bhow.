@@ -11,3 +11,4 @@ The verified deployed API was FastAPI `0.6.3` with `/api` and `/api/health`. The
 ## Features in this package
 
 - Dog registry: create, view and delete dog records.
+- Care tasks: add, complete and delete tasks.
