@@ -84,3 +84,5 @@ Import the folder/repository into Vercel. The included `vercel.json` maps `/api/
 - Storage is private. The frontend uses authenticated uploads and short-lived signed URLs for image display.
 - Local mode stores records in the browser's localStorage. Clearing browser data can remove local-only records.
 - Do not upload sensitive personal data or images without appropriate consent.
+- A lost-dog report should expose only contact details the reporting user has chosen to share.
+
