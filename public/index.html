@@ -211,3 +211,6 @@ function persist(store){localSave();render();syncChain=syncChain.then(()=>cloudS
 async function cloudSync(store){
  if(!state.client||!state.user)return;
  try{
+  const records=state[store];
+  const {data:existing,error:readErr}=await state.client.from("bhow_user_records").select("record_id").eq("store_name",store);
+  if(readErr)throw readErr;
