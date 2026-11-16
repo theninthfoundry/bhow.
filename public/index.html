@@ -227,3 +227,6 @@ async function cloudSync(store){
  }catch(err){console.error(err);setStatus("Cloud sync issue — saved locally","err");}
 }
 async function cloudLoad(){
+ if(!state.client||!state.user)return;
+ setStatus("Syncing…");
+ const {data,error}=await state.client.from("bhow_user_records").select("store_name,record_id,payload");
